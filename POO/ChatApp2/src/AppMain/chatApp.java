@@ -30,23 +30,24 @@ public class chatApp {
 	public static Connection con;
 	public static void main(String[] args) {
 		connected = false;
-		try {
-			connectDB();
-		} catch (ClassNotFoundException | SQLException e3) {
-			// TODO Auto-generated catch block
-			e3.printStackTrace();
-		}
 		//Server TCP peut etre activer que si fin de connection
 		ActiveTCPServer();
 		//Server UDP
 		ActiveUDPServer();
-		
+
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 		LocalDateTime now = LocalDateTime.now();
 		String date = dtf.format(now);
 		System.out.println(date);
+		
 		//Initialisation de la liste des users
 		listUser =  new HashMap<InetAddress, String>();
+		try {
+			listUser.put(InetAddress.getByName("118.1.2.6"), "paul");
+		} catch (UnknownHostException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		}
 		//R�cuperation adresseIP
 		try {
 			GetCurrentIP();
@@ -80,6 +81,20 @@ public class chatApp {
 			e1.printStackTrace();
 		}
 		new LoginView();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			System.out.println("remove");
+			removeUser(InetAddress.getByName("118.1.2.6"));
+			System.out.println(listUser.size());
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static void miseEnRelation(InetAddress ip, String login) throws UnknownHostException, IOException {
@@ -139,7 +154,7 @@ public class chatApp {
 	
 	public static boolean CheckUnicity(String log)
 	{
-		return listUser.containsValue(log);
+		return !listUser.containsValue(log);
 	}
 
 	public static void removeUser(InetAddress address) {

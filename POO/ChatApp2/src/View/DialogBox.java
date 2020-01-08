@@ -85,6 +85,6 @@ public class DialogBox extends JFrame implements ActionListener {
 	
 	private void exitProcedure()
 	{
-		this.thread.dipose();
+		this.thread.dispose();
 	}
 }

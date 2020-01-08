@@ -11,6 +11,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Timer;
 
+import AppMain.Message;
+import AppMain.chatApp;
 import View.DialogBox;
 
 public class ConnectThread implements Runnable {
@@ -40,9 +42,22 @@ public class ConnectThread implements Runnable {
 				if(reader.ready())//rcv
 				{
 					input = reader.readLine();
-					this.view.AddTextToJTextArea(this.loginDestinataire + " > " + input);
+					if("hasquit".equalsIgnoreCase(input))
+					{
+						this.view.AddTextToJTextArea(this.loginDestinataire + " left ... The convessation will close ...");
+					}
+					else
+					{
+						this.view.AddTextToJTextArea(this.loginDestinataire + " > " + input);
+						DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+						LocalDateTime now = LocalDateTime.now();
+						String date = dtf.format(now);
+						System.out.println(date);
+						Message m = new Message(chatApp.login, date, this.loginDestinataire, input);
+					}
 				}
 			}
+			send("hasquit");
 			reader.close();
 			this.out.close();
 			this.s.close();
@@ -54,7 +69,8 @@ public class ConnectThread implements Runnable {
 	public void send(String txt) throws IOException
 	{
 		out.write((txt+"\n").getBytes());
-		this.view.AddTextToJTextArea("You > " + txt);
+		if(!"hasquit".equalsIgnoreCase(txt))
+			this.view.AddTextToJTextArea("You > " + txt);
 	}
 	
 	public void dispose()

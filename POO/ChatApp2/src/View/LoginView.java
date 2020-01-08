@@ -7,6 +7,7 @@ import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -47,6 +48,13 @@ public class LoginView extends JFrame implements ActionListener {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(this, 
+				         "Le login que vous venez de rentrer est déja pris" ,
+				         " Erreur unicité du login ",
+				         JOptionPane.WARNING_MESSAGE);
 			}
 		}
 	}
