@@ -7,6 +7,11 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -22,15 +27,27 @@ public class chatApp {
 	public static InetAddress ip;
 	public static HomeView v;
 	public static boolean connected;
+	public static Connection con;
 	public static void main(String[] args) {
 		connected = false;
+		try {
+			connectDB();
+		} catch (ClassNotFoundException | SQLException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		}
 		//Server TCP peut etre activer que si fin de connection
 		ActiveTCPServer();
 		//Server UDP
 		ActiveUDPServer();
+		
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+		LocalDateTime now = LocalDateTime.now();
+		String date = dtf.format(now);
+		System.out.println(date);
 		//Initialisation de la liste des users
 		listUser =  new HashMap<InetAddress, String>();
-		//Récuperation adresseIP
+		//Rï¿½cuperation adresseIP
 		try {
 			GetCurrentIP();
 		} catch (UnknownHostException e2) {
@@ -93,10 +110,11 @@ public class chatApp {
 
 	public static void addUser(InetAddress i, String log)
 	{
-		if(!listUser.containsKey(ip) && !i.equals(ip) && !log.equals("null"))
+		if(!listUser.containsKey(i) && !i.equals(ip) && !log.equals("null"))
 		{
 			listUser.put(i, log);
-			v.ActualiseList();
+			if(v != null)
+				v.ActualiseList();
 		}
 	}
 
@@ -121,10 +139,18 @@ public class chatApp {
 	
 	public static boolean CheckUnicity(String log)
 	{
-		return true;
+		return listUser.containsValue(log);
 	}
 
 	public static void removeUser(InetAddress address) {
 		listUser.remove(address);
+	}
+	
+	public static void connectDB() throws ClassNotFoundException, SQLException
+	{
+		con = null;
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/srv-bdens.insa-toulouse.fr","login1", "pwd1");
+		
 	}
 }

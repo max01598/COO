@@ -38,7 +38,7 @@ public class HomeView extends JFrame implements ActionListener {
 		red.add(new JLabel("User Connected"), BorderLayout.NORTH);
 		list = new ListUserConteneur();
 		list.GenerateList();
-		System.out.println(chatApp.listUser.size());
+		//System.out.println(chatApp.listUser.size());
 		
 		red.add(list, BorderLayout.CENTER);
 		global.add(red,BorderLayout.EAST);

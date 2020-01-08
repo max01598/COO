@@ -5,6 +5,8 @@ import java.awt.FlowLayout;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 import javax.swing.*;
@@ -45,10 +47,16 @@ public class DialogBox extends JFrame implements ActionListener {
 		
 		globalPanel.add(redPanel,BorderLayout.CENTER);
 		globalPanel.add(yellowPanel,BorderLayout.SOUTH);
-		
+		addWindowListener(new WindowAdapter() {
+	        @Override
+	        public void windowClosing(WindowEvent event) {
+	            exitProcedure();
+	        }
+	    });
 		this.add(globalPanel);
 		
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		
 		setTitle("Conversation with "+ login);
 		pack();
 		setVisible(true);
@@ -73,5 +81,10 @@ public class DialogBox extends JFrame implements ActionListener {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	private void exitProcedure()
+	{
+		this.thread.dipose();
 	}
 }

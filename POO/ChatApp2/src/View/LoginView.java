@@ -30,7 +30,7 @@ public class LoginView extends JFrame implements ActionListener {
 		global.add(loginTxt);
 		global.add(loginBuut);
 		this.add(global);
-		
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		pack();
 		setVisible(true);
 	}

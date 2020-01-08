@@ -37,6 +37,11 @@ public class ButtList extends JButton implements ActionListener {
 		}
 	}
 	
+	public InetAddress getIp()
+	{
+		return this.ip	;
+	}
+	
 	
 	
 	

@@ -34,7 +34,7 @@ public class ServerUdpThreads implements Runnable {
 				{
 					handleConnectedMessage(tokens);
 				}
-				else if("disconnected".equalsIgnoreCase(tokens[0]))
+				else if("disconnect".equalsIgnoreCase(tokens[0]))
 				{
 					
 				}
