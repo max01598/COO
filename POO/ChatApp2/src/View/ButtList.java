@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 
@@ -31,7 +32,7 @@ public class ButtList extends JButton implements ActionListener {
 		try {
 			System.out.println("Will enter on connection");
 			chatApp.miseEnRelation(this.ip, this.login);
-		} catch (IOException e1) {
+		} catch (IOException | SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}

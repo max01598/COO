@@ -9,11 +9,13 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.Scanner;
 
 import TCPServer.*;
 import UDPServer.*;
@@ -34,7 +36,19 @@ public class chatApp {
 		ActiveTCPServer();
 		//Server UDP
 		ActiveUDPServer();
-
+		//ConnectTo DB
+		try {
+			connectDB();
+		} catch (ClassNotFoundException e4) {
+			// TODO Auto-generated catch block
+			e4.printStackTrace();
+		} catch (SQLException e4) {
+			// TODO Auto-generated catch block
+			e4.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 		LocalDateTime now = LocalDateTime.now();
 		String date = dtf.format(now);
@@ -42,12 +56,12 @@ public class chatApp {
 		
 		//Initialisation de la liste des users
 		listUser =  new HashMap<InetAddress, String>();
-		try {
-			listUser.put(InetAddress.getByName("118.1.2.6"), "paul");
+		/*try {
+			//listUser.put(InetAddress.getByName("118.1.2.6"), "paul");
 		} catch (UnknownHostException e3) {
 			// TODO Auto-generated catch block
 			e3.printStackTrace();
-		}
+		}*/
 		//R�cuperation adresseIP
 		try {
 			GetCurrentIP();
@@ -97,7 +111,7 @@ public class chatApp {
 		}
 	}
 	
-	public static void miseEnRelation(InetAddress ip, String login) throws UnknownHostException, IOException {
+	public static void miseEnRelation(InetAddress ip, String login) throws UnknownHostException, IOException, SQLException {
 		Socket s = new Socket(ip,4440);
 		new Thread(new ConnectThread(s, login)).start();
 	}
@@ -161,11 +175,12 @@ public class chatApp {
 		listUser.remove(address);
 	}
 	
-	public static void connectDB() throws ClassNotFoundException, SQLException
+	public static void connectDB() throws ClassNotFoundException, SQLException, ParseException
 	{
 		con = null;
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/srv-bdens.insa-toulouse.fr","login1", "pwd1");
-		
+		con = DriverManager.getConnection("jdbc:mysql://srv-bdens.insa-toulouse.fr:3306/tpservlet_10","tpservlet_10", "Phee7aed");
+		PreparedStatement statement = con.prepareStatement("DELETE FROM Message;");
+		statement.execute();
 	}
 }

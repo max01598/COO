@@ -5,11 +5,11 @@ import java.util.Date;
 public class Message {
 
 	String loginEm;
-	String date;
+	Date date;
 	String loginDest;
 	String contenu;
 	
-	public Message(String logE, String d, String logD, String c)
+	public Message(String logE, Date d, String logD, String c)
 	{
 		this.loginEm = logE;
 		this.date = d;

@@ -1,0 +1,9 @@
+CREATE TABLE Message
+(
+	id smallint unsigned not null auto_increment,
+	login_Emmeteur VARCHAR(50),
+	date Date,
+	login_Destinataire VARCHAR(50),
+	contenu VARCHAR(500),
+	constraint pk_example primary key (id)
+);

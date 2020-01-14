@@ -2,6 +2,7 @@ package TCPServer;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import AppMain.chatApp;
 
@@ -26,7 +27,7 @@ public class Server_TCP implements Runnable{
 				String login = chatApp.listUser.get(clientDestSocket.getInetAddress());
 				new Thread(new ConnectThread(clientDestSocket, login)).start();
 			}	
-		} catch (IOException e) {
+		} catch (IOException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

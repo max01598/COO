@@ -6,6 +6,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -24,11 +29,13 @@ public class ConnectThread implements Runnable {
 	BufferedReader reader;
 	String loginDestinataire;
 	boolean inWork;
-	public ConnectThread(Socket sock, String login) throws IOException {
+	public ConnectThread(Socket sock, String login) throws IOException, SQLException {
 		this.s = sock;
 		this.in = this.s.getInputStream();
 		this.out = this.s.getOutputStream();
-		this.view = new DialogBox(this, login);
+		Statement statement = chatApp.con.createStatement();
+		ResultSet res = statement.executeQuery("SELECT * FROM Message;");
+		this.view = new DialogBox(this, login,res);
 		this.loginDestinataire = login;
 		this.inWork = true;
 	}
@@ -49,11 +56,15 @@ public class ConnectThread implements Runnable {
 					else
 					{
 						this.view.AddTextToJTextArea(this.loginDestinataire + " > " + input);
-						DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-						LocalDateTime now = LocalDateTime.now();
-						String date = dtf.format(now);
-						System.out.println(date);
+						Date date = new Date();  
+						PreparedStatement statement = chatApp.con.prepareStatement("INSERT INTO Message(id,login_Emmeteur,date,login_Destinataire,contenu) VALUES (null,?,?,?,?);");
+						java.sql.Date date_sql = new java.sql.Date(date.getTime());
 						Message m = new Message(chatApp.login, date, this.loginDestinataire, input);
+						statement.setString(1, chatApp.login);
+						statement.setDate(2, date_sql);
+						statement.setString(3, this.loginDestinataire);
+						statement.setString(4, input);
+						System.out.println(statement.execute());
 					}
 				}
 			}

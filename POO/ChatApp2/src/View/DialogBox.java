@@ -8,9 +8,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.*;
 
+import AppMain.chatApp;
 import TCPServer.ConnectThread;
 
 //slide 30 pour le listener
@@ -26,11 +29,13 @@ public class DialogBox extends JFrame implements ActionListener {
 	ConnectThread thread;
 	JTextField messageToSend;
 	JButton sendButt;
-	
-	public DialogBox(ConnectThread t, String login)
+	ResultSet r;
+	String log;
+	public DialogBox(ConnectThread t, String login,ResultSet res)
 	{
 		this.thread = t;
-		
+		this.r = res;
+		this.log = login;
 		JPanel globalPanel = new JPanel(new BorderLayout());
 		
 		JPanel redPanel = new JPanel(new BorderLayout());
@@ -47,16 +52,21 @@ public class DialogBox extends JFrame implements ActionListener {
 		
 		globalPanel.add(redPanel,BorderLayout.CENTER);
 		globalPanel.add(yellowPanel,BorderLayout.SOUTH);
+		
+		this.add(globalPanel);
+		try {
+			GenerateHistorique();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
 	        @Override
 	        public void windowClosing(WindowEvent event) {
 	            exitProcedure();
 	        }
 	    });
-		this.add(globalPanel);
-		
-		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		
 		setTitle("Conversation with "+ login);
 		pack();
 		setVisible(true);
@@ -83,8 +93,27 @@ public class DialogBox extends JFrame implements ActionListener {
 		}
 	}
 	
+	private void GenerateHistorique() throws SQLException
+	{
+		System.out.println(this.r.next());
+		while(this.r.next())
+		{
+			String em = this.r.getString(2);
+			System.out.println(em);
+			if(em.equalsIgnoreCase(chatApp.login))
+			{
+				AddTextToJTextArea("You > " + this.r.getString(5));
+			}
+			else
+			{
+				AddTextToJTextArea(this.log + " > " + this.r.getString(5));
+			}
+		}
+	}
+	
 	private void exitProcedure()
 	{
 		this.thread.dispose();
+		this.dispose();
 	}
 }
