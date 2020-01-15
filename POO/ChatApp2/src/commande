@@ -5,3 +5,5 @@ reponse : connected <username>
 login <username> 
 **Deconnection
 disconnect <username>
+**Changement de pseudo
+change <username>

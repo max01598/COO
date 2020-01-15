@@ -4,12 +4,14 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.LocalDateTime;
@@ -19,9 +21,15 @@ import java.util.HashMap;
 
 import TCPServer.*;
 import UDPServer.*;
+import View.DialogBox;
 import View.HomeView;
 import View.LoginView;
 
+
+/*Le controller rx => va permettre l'ouverture des serveurs, l'envoie de message (who,login,connected,deconnexion,change  ...)
+ * controller user => gestion de la liste des users actifs (Ajout, modification et suppression)
+ * controller session => gestion de l'histrorique
+ */
 public class chatApp {
 
 	public static HashMap<InetAddress, String> listUser;
@@ -49,7 +57,7 @@ public class chatApp {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+		/*DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 		LocalDateTime now = LocalDateTime.now();
 		String date = dtf.format(now);
 		System.out.println(date);
@@ -61,7 +69,7 @@ public class chatApp {
 		} catch (UnknownHostException e3) {
 			// TODO Auto-generated catch block
 			e3.printStackTrace();
-		}*/
+		}
 		//R�cuperation adresseIP
 		try {
 			GetCurrentIP();
@@ -108,14 +116,14 @@ public class chatApp {
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
-	
+	/*Controller Rx*/
 	public static void miseEnRelation(InetAddress ip, String login) throws UnknownHostException, IOException, SQLException {
 		Socket s = new Socket(ip,4440);
 		new Thread(new ConnectThread(s, login)).start();
 	}
-
+	/*Controller Rx*/
 	private static void GetCurrentIP() throws UnknownHostException, SocketException
 	{
 		try(final DatagramSocket socket = new DatagramSocket()){
@@ -123,6 +131,7 @@ public class chatApp {
 		  ip = socket.getLocalAddress();
 		}
 	}
+	/*Controller Rx*/
 	private static void ActiveTCPServer()
 	{
 		Server_TCP server = new Server_TCP();
@@ -130,6 +139,7 @@ public class chatApp {
 		c.start();
 	}
 	
+	/*Controller Rx*/
 	private static void ActiveUDPServer()
 	{
 		Server_UDP server_udp = new Server_UDP();
@@ -182,5 +192,37 @@ public class chatApp {
 		con = DriverManager.getConnection("jdbc:mysql://srv-bdens.insa-toulouse.fr:3306/tpservlet_10","tpservlet_10", "Phee7aed");
 		PreparedStatement statement = con.prepareStatement("DELETE FROM Message;");
 		statement.execute();
+		login = "Marty";
+		PreparedStatement statement2 = chatApp.con.prepareStatement("INSERT INTO Message(login_Emmeteur,date,login_Destinataire,contenu) VALUES (?,?,?,?);");
+		Date date = new Date();
+		java.sql.Date date_sql = new java.sql.Date(date.getTime());
+		statement2.setString(1, chatApp.login);
+		statement2.setDate(2, date_sql);
+		statement2.setString(3, "paul");
+		statement2.setString(4, "Yooo");
+		statement2.execute();
+		Date date2 = new Date();
+		java.sql.Date date_sql2 = new java.sql.Date(date2.getTime());
+		statement2.setString(1, "paul");
+		statement2.setDate(2, date_sql2);
+		statement2.setString(3,login);
+		statement2.setString(4, "Yooo");
+		statement2.execute();
+		
+		ResultSet res = statement.executeQuery("SELECT * FROM Message;");
+		//System.out.println(res.next());
+		while(res.next())
+		{
+			String em = res.getString(2);
+			System.out.println(em);
+			if(em.equalsIgnoreCase(chatApp.login))
+			{
+				System.out.println("You > " + res.getString(5));
+			}
+			else
+			{
+				System.out.println("Paul > " + res.getString(5));
+			}
+		}
 	}
 }
