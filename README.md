@@ -7,6 +7,7 @@ Dans ce rapport, nous allons vous expliquer nos choix de technologie utilisée p
 **Pré-requis :**
   - Java installé
   - librairie Ant.
+ 
  **Configuration base de données**
  **Caractéristiques des machines hôtes :**
  
