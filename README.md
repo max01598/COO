@@ -21,6 +21,7 @@
 ### Premiere approche :
 
   À chaque utilisation d'Applichat, vous sera demandé un pseudo qui permettra aux autres utilisateurs de vous identifier. Ce pseudo doit être unique, pas d’inquiétude un pseudo qui ne respecte pas l’unicité sera refusé. Vous pouvez faire plusieurs tentatives si le pseudo est déjà pris pour trouver un pseudo unique. Attention, il est important de comprendre que votre pseudo est limité à l’utilisation actuelle, il n’est pas nécessaire de toujours avoir le même. Concrètement, c’est l’ordinateur avec son adresse IP qui permettra de récupérer l’historique des conversations effectuées sur la machine. Pour valider votre pseudo, vous pouvez appuyer sur la touche “Entrer” ou bien cliquer sur le bouton de connexion. **Les espaces peuvent faire buguer le projet.**
+
 ![alt text](https://raw.githubusercontent.com/max01598/COO/master/img/login.png)
 
 ### Utiliser Applichat :
@@ -38,7 +39,9 @@
 **Changer son pseudo :** 
 
   Tout le long de l'utilisation, vous avez la possibilité de modifier votre pseudo. Pour ce faire, rendez-vous sur la page d'accueil, en haut à gauche se trouve l’option  “Gestion pseudo”. Cliquez dessus et vous serez redirigé vers une fenêtre permettant la modification du pseudo (le critère d’unicité s’applique toujours).
+
 ![alt text](https://raw.githubusercontent.com/max01598/COO/master/img/gestionPseudo.png)
+
 **Se déconnecter**
   Pour vous déconnecter, vous pouvez, soit fermer la fenêtre d'accueil soit cliquer sur l’option “Déconnexion”. Les autres utilisateurs seront avertis et ne vous verront plus en tant qu’utilisateur connecté.
 
