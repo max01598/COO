@@ -39,5 +39,5 @@
 **Se déconnecter**
   Pour vous déconnecter, vous pouvez, soit fermer la fenêtre d'accueil soit cliquer sur l’option “Déconnexion”. Les autres utilisateurs seront avertis et ne vous verront plus en tant qu’utilisateur connecté.
 
-![alt text](https://raw.githubusercontent.com/max01598/COO/master/img.jpg)
+![alt text](https://raw.githubusercontent.com/max01598/COO/master/img.)
 
