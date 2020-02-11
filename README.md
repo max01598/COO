@@ -36,7 +36,7 @@ Pour lancer l'application, il vous faut **se
 
   Une fenêtre s’ouvre alors, permettant de communiquer avec l’autre utilisateur. L’historique de la conversation s’affiche instantanément. Vous pouvez écrire votre message à l’aide de la barre de texte qui se trouve en bas. 
 
-![alt text](https://raw.githubusercontent.com/max01598/COO/master/img/chat.PNG)
+![alt text](https://raw.githubusercontent.com/max01598/COO/master/img/chat.png)
 
 **Changer son pseudo :** 
 
