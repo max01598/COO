@@ -6,13 +6,37 @@ Dans ce rapport, nous allons vous expliquer nos choix de technologie utilisée p
 ## Installation :
 **Pré-requis :**
   - Java installé
+  - Eclipse (IDE)
  
-Pour lancer l'application, il vous faut **se 
+
  **Configuration base de données**
- 
+
+Les différents paramètres d'accès à la base de données se trouvent dans les constantes du fichier chatApp.java se trouvant dans le dossier chatApp2/src/AppMain/.
+
+Si vous souhaitez modifier le code et utiliser votre base de données vous devez modifier les constantes du fichier chatApp.java, puis après avoir recompilé, soit re exécuter le projet soit l'exporter en "Runnable jar". Par conséquent, vous devez alors exécuter la commande SQL suivante :
+
+>CREATE TABLE Message
+
+>(
+
+>	id smallint unsigned not null auto_increment,
+
+>	login_Emmeteur VARCHAR(50),
+
+>	date Date,
+
+>	login_Destinataire VARCHAR(50),
+
+>	contenu VARCHAR(500),
+
+>	constraint pk_example primary key (id)
+
+>);
+
  **Caractéristiques des machines hôtes :**
  
-  Pour utiliser Applichat, les machines hôtes devront se trouver sur le même réseau. Et pour l’utilisation de la base de données telle qu'elle est configurée dans le code source, il vous faudra être sur une machine de l’INSA Toulouse.
+Pour utiliser Applichat, les machines hôtes devront se trouver sur le même réseau. Et pour l’utilisation de la base de données telle qu'elle est configurée dans le code source, il vous faudra être sur une machine de l’INSA Toulouse.
+Pour lancer l'application, il vous faut **se placer dans le dossier ChatApp2 et executer la commande : java -jar Applichat.jar. 
 
 ## Utiliser Applichat :
 
