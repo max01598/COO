@@ -37,7 +37,7 @@ public class chatApp {
 		this.listUsers = new ArrayList<User>();
 		ActiveTCPServer();
 		ActiveUDPServer();
-		//connectDB(classN,c,l,mdp);
+		connectDB(classN,c,l,mdp);
 		currentUser = new User(NetworkUtils.GetCurrentIP(),"none");
 		state = States.IDLE;
 		NetworkUtils.sendMessage("who");
