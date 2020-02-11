@@ -1,13 +1,13 @@
 # POO rapport
 ## Introduction :
 
-  Dans ce rapport, nous allons vous expliquer nos choix de technologie utilisée pour construire ce système de clavardage. Ainsi faire un petit manuel d’utilisation du produit illustré de quelques images pour expliquer nos propos.
+Dans ce rapport, nous allons vous expliquer nos choix de technologie utilisée pour construire ce système de clavardage. Ainsi faire un petit manuel d’utilisation du produit illustré de quelques images pour expliquer nos propos.
 
 ## Installation :
 **Pré-requis :**
   - Java installé
-  - librairie Ant.
  
+Pour lancer l'application, il vous faut **se 
  **Configuration base de données**
  
  **Caractéristiques des machines hôtes :**
