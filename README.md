@@ -16,21 +16,13 @@ Les différents paramètres d'accès à la base de données se trouvent dans les
 Si vous souhaitez modifier le code et utiliser votre base de données vous devez modifier les constantes du fichier chatApp.java, puis après avoir recompilé, soit re exécuter le projet soit l'exporter en "Runnable jar". Par conséquent, vous devez alors exécuter la commande SQL suivante :
 
 >CREATE TABLE Message
-
 >(
-
 >	id smallint unsigned not null auto_increment,
-
 >	login_Emmeteur VARCHAR(50),
-
 >	date Date,
-
 >	login_Destinataire VARCHAR(50),
-
 >	contenu VARCHAR(500),
-
 >	constraint pk_example primary key (id)
-
 >);
 
  **Caractéristiques des machines hôtes :**
@@ -72,5 +64,6 @@ Pour lancer l'application, il vous faut **se placer dans le dossier ChatApp2 et 
 
 Pour vous déconnecter, vous pouvez, soit fermer la fenêtre d'accueil soit cliquer sur l’option “Déconnexion”. Les autres utilisateurs seront avertis et ne vous verront plus en tant qu’utilisateur connecté.
 
+**Nous espérons qu'Applichat vous plaira :)**
 
 
