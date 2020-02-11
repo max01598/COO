@@ -36,6 +36,8 @@ Pour lancer l'application, il vous faut **se
 
   Une fenêtre s’ouvre alors, permettant de communiquer avec l’autre utilisateur. L’historique de la conversation s’affiche instantanément. Vous pouvez écrire votre message à l’aide de la barre de texte qui se trouve en bas. 
 
+![alt text](https://raw.githubusercontent.com/max01598/COO/master/img/chat.PNG)
+
 **Changer son pseudo :** 
 
   Tout le long de l'utilisation, vous avez la possibilité de modifier votre pseudo. Pour ce faire, rendez-vous sur la page d'accueil, en haut à gauche se trouve l’option  “Gestion pseudo”. Cliquez dessus et vous serez redirigé vers une fenêtre permettant la modification du pseudo (le critère d’unicité s’applique toujours).
